@@ -146,3 +146,40 @@ input[type="email"] {
   background-color: #E99E6E;
   cursor: pointer;
 }
+
+.site-nav a {
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.site-nav a:hover {
+  color: #D88959;
+  background-color: #FFF8EC;
+}
+
+.site-nav a:focus {
+  outline: 3px solid #F6D4BE;
+  outline-offset: 3px;
+}
+
+input[type="email"]:focus {
+  border-color: #E99E6E;
+  outline: 3px solid #F6D4BE;
+  outline-offset: 2px;
+}
+
+.primary-button {
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.primary-button:hover {
+  background-color: #D88959;
+}
+
+.primary-button:focus { 
+  outline: 3px solid #F6D4BE;
+  outline-offset: 3px;
+}
+
+.primary-button:active {
+  transform: translateY(1px); 
+}
