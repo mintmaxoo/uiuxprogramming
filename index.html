@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>책들</title>
 </head>
+
 <body>
   <!-- UX 계획
   사용자: 여러 책을 동시에 읽으며 기록을 하는 사람
@@ -12,51 +13,75 @@
   핵심 행동: 원하는 영역으로 이동하고 기록을 남기고 모아진 기록을 받아본다.
   정보 순서: 서비스 소개 → 주요 기능 → 이용 방법 → 모아진 기록 받기
   -->
+
   <header>
     <h1>병행독서 기록 메모</h1>
-    <p>여러 책의 메모를 한 곳에 가볍게 남기고, 그날과 책별의 기록으로 모아 봅니다.</p>    
+    <p>여러 책의 메모를 한 곳에 가볍게 남기고, 그날과 책별의 기록으로 모아 봅니다.</p>
+    
+    <nav aria-label="주요 메뉴">
+      <a href="#about">서비스 소개</a>
+      <a href="#features">주요 기능</a>
+      <a href="#steps">이용 방법</a>
+      <a href="#subscribe">기록 묶음 받기</a>
+    </nav>
   </header>
-  <h2>서비스 소개</h2>
-  <h3>편안한 병행독서 기록 도우미</h3>
-  <p>그날그날의 흩어진 기록을 한 곳에서 모아 볼 수 있습니다.</p>
 
-  <img 
-    src="./assets/images/service.png" 
-    alt="기록된 메모의 흐름과 메모하는 휴대폰 화면"
-  >
+  <main>
+    <section id="about">
+      <h2>서비스 소개</h2>
+      <h3>편안한 병행독서 기록 도우미</h3>
+      <p>그날그날의 흩어진 기록을 한 곳에서 모아 볼 수 있습니다.</p>
+    
+      <img 
+        src="./assets/images/service.png" 
+        alt="기록된 메모의 흐름과 메모하는 휴대폰 화면"
+      >
+    </section>
 
-  <h2>주요 기능</h2>
-  <ul>
-    <li>
-      <h3>읽는 중 책 목록</h3>
-      <p>읽는 중 책을 추가하고 한곳에서 확인하고 완독 상태를 변경합니다.</p>
-    </li>
-    <li>
-      <h3>책 메모 추가</h3>
-      <p>책을 선택하고 메모를 입력합니다.</p>
-    </li>
-    <li>
-      <h3>완독 책 목록</h3>
-      <p>다 읽은 책을 누르면 그 책의 메모가 모여 보입니다.</p>
-    </li>
-  </ul>
-  <h2>이용 방법</h2>
-  <ol>
-    <li>읽는 중 책을 추가합니다.</li>
-    <li>책을 선택해 채팅하듯 가벼운 메모를 남깁니다.</li>
-    <li>다 읽은 책의 기록을 메일로 받아 봅니다.</li>
-  </ol>
-
-  <h2>기록 묶음 받기</h2>
-  <form>
-    <label for="email">이메일</label>
-    <input
-      type="email"
-      id="email"
-      name="email"
-      placeholder="name@example.com"
-    >
-    <button type="submit">기록 묶음 신청</button>
-  </form>
+    <section id="features">
+      <h2>주요 기능</h2>
+      <ul>
+        <li>
+          <h3>읽는 중 책 목록</h3>
+          <p>읽는 중 책을 추가하고 한곳에서 확인하고 완독 상태를 변경합니다.</p>
+        </li>
+        <li>
+          <h3>책 메모 추가</h3>
+          <p>책을 선택하고 메모를 입력합니다.</p>
+        </li>
+        <li>
+          <h3>완독 책 목록</h3>
+          <p>다 읽은 책을 누르면 그 책의 메모가 모여 보입니다.</p>
+        </li>
+      </ul>
+    </section>
+    
+    <section id="steps">
+      <h2>이용 방법</h2>
+      <ol>
+        <li>읽는 중 책을 추가합니다.</li>
+        <li>책을 선택해 채팅하듯 가벼운 메모를 남깁니다.</li>
+        <li>다 읽은 책의 기록을 메일로 받아 봅니다.</li>
+      </ol>    
+    </section>
+    
+    <section id="subscribe">
+      <h2>기록 묶음 받기</h2>
+      <form>
+        <label for="email">이메일</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="name@example.com"
+        >
+        <button type="submit">기록 묶음 신청</button>
+      </form>
+    </section>
+  </main>
+  
+  <footer>
+    <small>© 2026 병행독서 기록 메모</small>
+  </footer>
 </body>
 </html>
