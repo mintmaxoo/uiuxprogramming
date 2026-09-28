@@ -23,3 +23,38 @@ main,
   padding-left: 24px;
   padding-right: 24px;
 }
+
+.site-header {
+  padding-top: 72px;
+  padding-bottom: 48px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: #E99E6E;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+h1, h2, h3, p { margin-top: 0; }
+h1 { margin-bottom: 12px; font-size: 44px; line-height: 1.2; }
+h2 { margin-bottom: 24px; font-size: 30px; }
+h3 { margin-bottom: 10px; font-size: 20px; }
+
+.header-description {
+  margin-bottom: 28px;
+  color: #5e6272;
+  font-size: 18px;
+}
+
+.site-nav {
+  display: flex;
+  gap: 12px;
+}
+
+.site-nav a {
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-weight: 700;
+}
