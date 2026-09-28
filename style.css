@@ -4,7 +4,7 @@
 
 body {
   margin: 0;
-  color: #292a31;
+  color: #292A31;
   font-family: "Noto Sans KR", Arial, sans-serif;
   line-height: 1.6;
   background-color: #FDFBF7;
@@ -44,7 +44,7 @@ h3 { margin-bottom: 10px; font-size: 20px; }
 
 .header-description {
   margin-bottom: 28px;
-  color: #5e6272;
+  color: #5E6272;
   font-size: 18px;
 }
 
@@ -62,7 +62,7 @@ h3 { margin-bottom: 10px; font-size: 20px; }
 .content-section {
   margin-bottom: 24px;
   padding: 40px;
-  border: 1px solid #e0e1ec;
+  border: 1px solid #F5E3D1;
   border-radius: 18px;
   background-color: #ffffff;
 }
@@ -93,14 +93,14 @@ h3 { margin-bottom: 10px; font-size: 20px; }
 .feature-card {
   flex: 1;
   padding: 24px;
-  border: 1px solid #d7d4f6;
+  border: 1px solid #F5E3D1;
   border-radius: 14px;
-  background-color: #f4f3ff;
+  background-color: #FFF3E5;
 }
 
 .feature-card p {
   margin-bottom: 0;
-  color: #5e6272;
+  color: #5E6272;
 }
 
 .steps-list {
@@ -110,4 +110,39 @@ h3 { margin-bottom: 10px; font-size: 20px; }
 
 .steps-list li + li {
   margin-top: 10px;
+}
+
+.subscribe-section { background-color: #FDF0E1; }
+.subscribe-form {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  max-width: 570px;
+}
+
+.email-field {
+  flex: 1;
+  margin: 0;
+  font-weight: 700;
+}
+
+input[type="email"] {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  padding: 12px 14px;
+  border: 1px solid #C2B8AD;
+  border-radius: 8px;
+  font: inherit;
+}
+
+.primary-button {
+  padding: 12px 18px;
+  border: 0;
+  border-radius: 8px;
+  color: #ffffff;
+  font: inherit;
+  font-weight: 700;
+  background-color: #E99E6E;
+  cursor: pointer;
 }
