@@ -102,3 +102,12 @@ h3 { margin-bottom: 10px; font-size: 20px; }
   margin-bottom: 0;
   color: #5e6272;
 }
+
+.steps-list {
+  margin: 0;
+  padding-left: 24px;
+}
+
+.steps-list li + li {
+  margin-top: 10px;
+}
