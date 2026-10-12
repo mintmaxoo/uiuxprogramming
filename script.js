@@ -1,0 +1,1 @@
+console.log("JavaScript가 연결되었습니다.");
