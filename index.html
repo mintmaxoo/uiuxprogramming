@@ -74,13 +74,16 @@
     
     <section id="subscribe" class="content-section subscribe-section">
       <h2>기록 묶음 받기</h2>
-      <form class="subscribe-form">
+      <form id="subscribe-form">
         <label class="email-field" for="email">이메일
           <input type="email" id="email" name="email"
             placeholder="name@example.com">
         </label>
         <button id="subscribeButton" class="primary-button" type="submit">기록 묶음 신청</button>
       </form>
+      <p id="subscribeMessage" aria-live="polite">
+        이메일을 입력한 뒤 신청해 주세요.
+      </p>
     </section>
   </main>
   

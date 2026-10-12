@@ -123,7 +123,7 @@ h3 { margin-bottom: 10px; font-size: 20px; }
 }
 
 .subscribe-section { background-color: #FDF0E1; }
-.subscribe-form {
+form {
   display: flex;
   align-items: flex-end;
   gap: 12px;
@@ -201,6 +201,25 @@ input[type="email"]:focus {
   font-size: 14px;
 }
 
+#subscribeMessage {
+  margin-top:16px;
+  color: #555763;
+}
+
+#subscribeMessage.is-success {
+  color: #245c3a;
+  background-color: #e7f7ed;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+#subscribeButton:disabled {
+  color: #ffffff;
+  background-color: #a8a8b2;
+  cursor: not-allowed;
+}
+
 /* 웹페이지가 표시되는 가로 폭이 768px 이하일 때만 적용 */
 @media (max-width: 768px) {
   body {
@@ -247,7 +266,7 @@ input[type="email"]:focus {
   }
 
   /* 이메일 입력창과 버튼을 한 열로 배치 */
-  .subscribe-form {
+  form {
     flex-direction: column;
     align-items: stretch;
   }

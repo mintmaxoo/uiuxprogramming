@@ -9,5 +9,12 @@ function makeSubscribeMessage(email, isSubscribed) {
     return "이메일을 입력한 뒤 신청해 주세요.";
 }
 
-console.log(makeSubscribeMessage("", false));
-console.log(makeSubscribeMessage("user@example.com", true));
+const subscribeForm = document.querySelector("#subscribe-form");
+const emailInput = document.querySelector("#email");
+const subscribeButton = document.querySelector("#subscribeButton");
+const subscribeMessage = document.querySelector("#subscribeMessage");
+
+console.log(subscribeForm);
+console.log(emailInput);
+console.log(subscribeButton);
+console.log(subscribeMessage);
