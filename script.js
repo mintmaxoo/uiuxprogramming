@@ -17,7 +17,22 @@ const subscribeMessage = document.querySelector("#subscribeMessage");
 function handleSubscribe(event) {
     event.preventDefault();
 
-    console.log("신청이 완료되었습니다.")
+    const subscriberEmail = emailInput.value.trim();
+
+    if (subscriberEmail === "") {
+        subscribeMessage.textContent = 
+            "이메일을 입력한 뒤 신청해 주세요.";
+        emailInput.focus();
+        return;
+    }
+
+    isSubscribed = true;
+    submitCount += 1;
+
+    subscribeMessage.textContent 
+        = makeSubscribeMessage(subscriberEmail, isSubscribed);
+
+    subscribeMessage.classList.add("is-success");
 }
 
 subscribeForm.addEventListener("submit", handleSubscribe);
