@@ -33,6 +33,9 @@ function handleSubscribe(event) {
         = makeSubscribeMessage(subscriberEmail, isSubscribed);
 
     subscribeMessage.classList.add("is-success");
+
+    subscribeButton.textContent = "신청 완료";
+    subscribeButton.disabled = true;
 }
 
 subscribeForm.addEventListener("submit", handleSubscribe);
