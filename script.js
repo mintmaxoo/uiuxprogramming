@@ -4,7 +4,7 @@ let submitCount = 0;
 
 function makeSubscribeMessage(email, subscribed) {
     if (subscribed == true) {
-        return email + "로 신청이 완료되었습니다.";
+        return email + "로 신청이 완료되었습니다. 이제 책을 다 읽으면 기록 묶음이 발송됩니다.";
     }
     return "이메일을 입력한 뒤 신청해 주세요.";
 }
@@ -38,4 +38,15 @@ function handleSubscribe(event) {
     subscribeButton.disabled = true;
 }
 
+function handleEmailInput() {
+    if (isSubscribed) {
+        isSubscribed = false;
+        subscribeButton.disabled = false;
+        subscribeButton.textContent = "기록 묶음 신청";
+        subscribeMessage.textContent = "이메일을 입력한 뒤 신청해 주세요.";
+        subscribeMessage.classList.remove("is-success");
+    }
+}
+
 subscribeForm.addEventListener("submit", handleSubscribe);
+emailInput.addEventListener("input", handleEmailInput);
