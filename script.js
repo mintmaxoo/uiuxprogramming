@@ -50,3 +50,76 @@ function handleEmailInput() {
 
 subscribeForm.addEventListener("submit", handleSubscribe);
 emailInput.addEventListener("input", handleEmailInput);
+
+const themeButton = document.querySelector("#themeButton");
+const userNameInput = document.querySelector("#userName");
+const userNameCount = document.querySelector("#userNameCount");
+const agreeCheck = document.querySelector("#agreeCheck");
+const agreeMessage = document.querySelector("#agreeMessage");
+const startButton = document.querySelector("#startButton");
+
+function handleThemeClick() {
+    const isDark = document.body.classList.toggle("dark");
+
+    themeButton.textContent = isDark
+        ? "라이트 테마로 바꾸기"
+        : "다크 테마로 바꾸기";
+}
+
+themeButton.addEventListener("click", handleThemeClick);
+
+function handleUserNameInput() {
+    const maxLength = userNameInput.maxLength;
+    const currentLength = Math.min(userNameInput.value.length, maxLength);
+
+    userNameCount.textContent = currentLength + " / " + maxLength;
+}
+
+userNameInput.addEventListener("input", handleUserNameInput);
+
+function handleAgreeChange() {
+    const agreed = agreeCheck.checked;
+
+    startButton.disabled = !agreed;
+    agreeMessage.textContent = agreed
+        ? "확인이 완료되었습니다. 서비스를 시작할 수 있습니다."
+        : "이용 방법 확인 후 서비스를 시작할 수 있습니다.";
+
+    agreeMessage.classList.toggle("is-ready", agreed);
+}
+
+agreeCheck.addEventListener("change", handleAgreeChange);
+
+const tabs = document.querySelectorAll(".tab");
+const panels = document.querySelectorAll(".panel");
+
+function resetTabsAndPanels() { 
+    tabs.forEach(function (tab) {
+        tab.classList.remove("is-active");
+        tab.setAttribute("aria-selected", "false");
+    });
+    panels.forEach(function (panel) {
+        panel.classList.remove("is-active");
+        panel.hidden = true;
+    });
+}
+
+function activateTab(clickedTab) { 
+    const targetSelector = clickedTab.dataset.target;
+    const targetPanel = document.querySelector(targetSelector);
+
+    clickedTab.classList.add("is-active");
+    clickedTab.setAttribute("aria-selected", "true");
+
+    targetPanel.classList.add("is-active");
+    targetPanel.hidden = false;
+}
+
+function handleTabClick(event) { 
+    resetTabsAndPanels();
+    activateTab(event.currentTarget);
+}
+
+tabs.forEach(function (tab) {
+    tab.addEventListener("click", handleTabClick);
+});

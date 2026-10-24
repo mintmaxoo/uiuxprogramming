@@ -47,20 +47,70 @@
 
     <section id="features" class="content-section">
       <h2>주요 기능</h2>
-      <ul class="feature-list">
-        <li class="feature-card">
-          <h3>읽는 중 책 목록</h3>
-          <p>읽는 중 책을 추가하고 한곳에서 확인하고 완독 상태를 변경합니다.</p>
-        </li>
-        <li class="feature-card">
-          <h3>책 메모 추가</h3>
-          <p>책을 선택하고 메모를 입력합니다.</p>
-        </li>
-        <li class="feature-card">
-          <h3>완독 책 목록</h3>
-          <p>다 읽은 책을 누르면 그 책의 메모가 모여 보입니다.</p>
-        </li>
-      </ul>
+
+      <div class="tabs" role="tablist" aria-label="기능 선택">
+        <button 
+          id="tab-reading" 
+          class="tab is-active"
+          type="button"
+          role="tab"
+          aria-selected="true"
+          aria-controls="feature-reading"
+          data-target="#feature-reading">
+          읽을 책 목록
+        </button>
+
+        <button 
+          id="tab-memo" 
+          class="tab"
+          type="button"
+          role="tab"
+          aria-selected="false"
+          aria-controls="feature-memo"
+          data-target="#feature-memo">
+          메모 남기기
+        </button>
+
+        <button 
+          id="tab-archive" 
+          class="tab"
+          type="button"
+          role="tab"
+          aria-selected="false"
+          aria-controls="feature-archive"
+          data-target="#feature-archive">
+          덮은 책 목록
+        </button>
+      </div>
+
+      <div
+        id="feature-reading"
+        class="panel is-active"
+        role="tabpanel"
+        aria-labelledby="tab-reading">
+        <h3>읽을 책 관리</h3>
+        <p>읽고 싶은 책을 추가하고 읽는 중인 책의 완독 상태를 변경합니다.</p>
+      </div>
+
+      <div
+        id="feature-memo"
+        class="panel"
+        role="tabpanel"
+        aria-labelledby="tab-memo"
+        hidden>
+        <h3>책을 읽고 메모</h3>
+        <p>읽는 중 상태의 책을 선택해 메모를 입력합니다.</p>
+      </div>
+
+      <div
+        id="feature-archive"
+        class="panel"
+        role="tabpanel"
+        aria-labelledby="tab-archive"
+        hidden>
+        <h3>덮은 책 기록 모음</h3>
+        <p>다 읽거나 중단한 책의 메모를 책별로 모아봅니다.</p>
+      </div>
     </section>
     
     <section id="steps" class="content-section">
@@ -70,6 +120,40 @@
         <li>책을 선택해 채팅하듯 가벼운 메모를 남깁니다.</li>
         <li>다 읽은 책의 기록을 메일로 받아 봅니다.</li>
       </ol>    
+    </section>
+
+    <section id="interaction-practice">
+      <h2>서비스 이용 설정</h2>
+
+      <div class="interaction-grid">
+        <article class="interaction-card">
+          <h3>화면 테마</h3>
+          <button id="themeButton" type="button">다크 테마로 바꾸기</button>
+        </article>
+        
+        <article class="interaction-card">
+          <h3>사용자 정보</h3>
+          <label for="userName">사용자 이름</label>
+          <input id="userName" type="text" maxlength="10" 
+            placeholder="10자 이내로 입력"
+          >
+          <p id="userNameCount" aria-live="polite">0 / 10</p>
+        </article>
+
+        <article class="interaction-card">
+          <h3>이용 시작 안내</h3>
+            <label class="agree-row" for="agreeCheck">
+              <input id="agreeCheck" type="checkbox">
+              서비스 이용 방법을 확인했습니다.
+            </label>
+            <p id="agreeMessage" aria-live="polite">
+              이용 방법 확인 후 서비스를 시작할 수 있습니다.
+            </p>
+            <button id="startButton" type="button" disabled>
+              기록 시작하기
+            </button>
+        </article>
+      </div>
     </section>
     
     <section id="subscribe" class="content-section subscribe-section">
