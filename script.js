@@ -82,8 +82,8 @@ function handleAgreeChange() {
 
     startButton.disabled = !agreed;
     agreeMessage.textContent = agreed
-        ? "확인이 완료되었습니다. 서비스를 시작할 수 있습니다."
-        : "이용 방법 확인 후 서비스를 시작할 수 있습니다.";
+        ? "확인이 완료되었습니다. 책 추가를 시작할 수 있습니다."
+        : "이용 방법 확인 후 책 추가를 시작할 수 있습니다.";
 
     agreeMessage.classList.toggle("is-ready", agreed);
 }
@@ -122,4 +122,112 @@ function handleTabClick(event) {
 
 tabs.forEach(function (tab) {
     tab.addEventListener("click", handleTabClick);
+});
+
+const bookFlow = document.querySelector("#book-flow");
+const flowSteps = bookFlow.querySelectorAll(".step");
+const progressItems = bookFlow.querySelectorAll(".progress_item");
+const titleInput = document.querySelector("#book-title");
+const titleError = document.querySelector("#title-error");
+const titleNext = document.querySelector("#title-next");
+const isReading = document.querySelector("#is-reading");
+const readingDetails = document.querySelector("#reading-details");
+const startDateInput = document.querySelector("#start-date");
+const optionPrev = document.querySelector("#option-prev");
+const optionNext = document.querySelector("#option-next");
+const summaryPrev = document.querySelector("#summary-prev");
+const finishButton = document.querySelector("#finish-button");
+const restartButton = document.querySelector("#restart-button");
+const summaryTitle = document.querySelector("#summary-title");
+const summaryStatus = document.querySelector("#summary-status");
+const summaryUnit = document.querySelector("#summary-unit");
+const summaryDate = document.querySelector("#summary-date");
+
+const bookData = {
+    title: "", unit: "page", isReadingNow: false, startDate: ""
+};
+
+function showStep(index) {
+    flowSteps.forEach((step, i) => { step.hidden = i !== index; });
+    progressItems.forEach((item, i) => {
+        item.classList.toggle("is-active", i === index);
+    });
+}
+
+startButton.addEventListener("click", () => {
+    bookFlow.hidden = false;
+    showStep(0);
+    bookFlow.scrollIntoView({ behavior: "smooth" });
+    titleInput.focus();
+});
+
+function validateTitle() {
+    const value = titleInput.value.trim();
+    if (!value) {
+        titleError.textContent = "책 제목을 입력해 주세요.";
+        titleInput.classList.add("has-error");
+        titleInput.focus();
+        return false;
+    }
+    titleError.textContent = "";
+    titleInput.classList.remove("has-error");
+    bookData.title = value;
+    return true;
+}
+
+titleNext.addEventListener("click", () => {
+    if (!validateTitle()) return;
+    showStep(1);
+});
+
+isReading.addEventListener("change", () => {
+    readingDetails.hidden = !isReading.checked;
+});
+
+optionPrev.addEventListener("click", () => showStep(0));
+
+optionNext.addEventListener("click", () => {
+    const selectedUnitRadio = document.querySelector('input[name="record-unit"]:checked');
+    bookData.unit = selectedUnitRadio ? selectedUnitRadio.value : "page";
+    
+    bookData.isReadingNow = isReading.checked;
+
+    if (bookData.isReadingNow) {
+        bookData.startDate = startDateInput.value ? startDateInput.value : "-";
+    } else {
+        bookData.startDate = "-";
+    }
+
+    summaryTitle.textContent = bookData.title;
+    summaryStatus.textContent = bookData.isReadingNow ? "읽는 중" : "읽을 예정";
+    summaryUnit.textContent = (bookData.unit === "page") ? "페이지" : "퍼센트";
+    summaryDate.textContent = bookData.startDate;
+
+    showStep(2);
+});
+
+summaryPrev.addEventListener("click", () => showStep(1));
+finishButton.addEventListener("click", () => showStep(3));
+
+restartButton.addEventListener("click", () => {
+    bookData.title = "";
+    bookData.unit = "page";
+    bookData.isReadingNow = false;
+    bookData.startDate = "";
+
+    titleInput.value = "";
+    titleError.textContent = "";
+    titleInput.classList.remove("has-error");
+    
+    document.querySelector('input[name="record-unit"][value="page"]').checked = true;
+    isReading.checked = false;
+    readingDetails.hidden = true;
+    startDateInput.value = "";
+
+    summaryTitle.textContent = "";
+    summaryStatus.textContent = "";
+    summaryUnit.textContent = "";
+    summaryDate.textContent = "";
+
+    showStep(0);
 });

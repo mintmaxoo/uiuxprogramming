@@ -369,6 +369,84 @@ body.dark .panel {
     border-color:  #705D50;
 }
 
+.book-flow {
+  padding: 36px;
+  border: 1px solid #deddea;
+  border-radius: 12px;
+  background-color: #ffffff;
+  margin-bottom: 24px;
+}
+
+.book-flow[hidden],
+.book-flow .step[hidden],
+.book-flow fieldset[hidden] { display: none; }
+
+.book-flow .progress {
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: 12px; 
+  margin-bottom: 24px;
+  color: #8c8c9b;
+  font-size: 0.9rem;
+}
+
+.book-flow .progress_item.is-active {
+  color: #E99E6E;
+  font-weight: 800;
+}
+
+.book-flow .error-message {
+  color: #9d243d;
+  font-weight: 700;
+}
+
+.book-flow input.has-error { 
+  border-color: #9d243d; 
+}
+
+.book-flow .summary-list > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid #deddea;
+}
+
+.book-flow .step-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+body.dark .book-flow {
+  background-color: #28221E;
+  border-color: #483B32;
+}
+
+input[type="text"],
+input[type="date"] {
+  width: auto;
+  margin: 10px 8px;
+  padding: 12px 14px;
+  border: 1px solid #C2B8AD;
+  border-radius: 8px;
+  font: inherit;
+}
+
+#reading-details {
+  margin-top: 12px;
+  margin-bottom: 20px;
+}
+
+.book-flow .checkbox-label {
+  font-weight: 600;
+}
+
+.unit-group {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
 /* 웹페이지가 표시되는 가로 폭이 768px 이하일 때만 적용 */
 @media (max-width: 768px) {
   body {
@@ -422,6 +500,7 @@ body.dark .panel {
 
   input[type="text"],
   input[type="email"],
+  input[type="date"],
   button {
     width: 100%;
   }
@@ -439,4 +518,7 @@ body.dark .panel {
     width: 100%;
     text-align: left;
   }
+
+  .book-flow { padding: 20px; }
+  .book-flow .step-actions button {width: 100%;}
 }
