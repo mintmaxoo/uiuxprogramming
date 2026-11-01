@@ -447,6 +447,180 @@ input[type="date"] {
   margin-bottom: 12px;
 }
 
+#book-shelf[hidden],
+.book-cards[hidden],
+#bookListEmpty[hidden] { display: none; }
+
+.shelf-header {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.shelf-header h2 {
+    margin: 0;
+}
+
+#shelf-guide {
+    font-size: 13px;
+    color: #8C868A;
+    font-weight: normal;
+    margin: 0;
+}
+
+.book-summary {
+  margin-top: 8px;
+  margin-bottom: 12px;
+  color: #5E6272;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+#bookListEmpty { color: #5E6272; }
+
+.book-cards {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.book-card-button {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+  padding: 16px 20px;
+  color: #292A31;
+  text-align: left;
+  background-color: #ffffff;
+  border: 1px solid #F5E3D1;
+  border-radius: 12px;
+}
+
+.book-card-button:hover {
+  background-color: #FFF8F0;
+  border-color: #E99E6E;
+}
+
+.book-card-button:focus { outline: none; }
+.book-card-button:focus-visible {
+  outline: 3px solid #F6D4BE;
+  outline-offset: -3px;
+}
+
+.book-cards li { min-width: 0; }
+
+.book-card-button h3 {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  font-size: 18px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.status-pill {
+  display: inline-block;
+  padding: 2px 12px;
+  color: #E99E6E;
+  background-color: transparent;
+  border: 1px solid #E99E6E;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.status-pill.is-reading {
+  color: #ffffff;
+  background-color: #E99E6E;
+}
+
+.detail-dialog {
+  width: 90%;
+  max-width: 400px;
+  padding: 28px 24px 20px;
+  border: none;
+  border-radius: 16px;
+  background-color: #ffffff;
+  color: #292A31;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.detail-dialog::backdrop {
+  background-color: rgba(41, 42, 49, 0.4);
+}
+
+.detail-dialog h3 {
+  margin-bottom: 16px;
+  font-size: 22px;
+  overflow-wrap: anywhere;
+}
+
+.detail-list > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid #deddea;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+body.dark .book-card-button {
+  color: #EFECE6;
+  background-color: #38302B;
+  border-color: #705D50;
+}
+
+body.dark .book-card-button:hover {
+  background-color: #483B32;
+  border-color: #E99E6E;
+}
+
+body.dark .status-pill.is-reading { color: #ffffff; }
+body.dark .detail-dialog { background-color: #28221E; color: #EFECE6; }
+body.dark .detail-list > div { border-bottom-color: #483B32; }
+
+#option-prev,
+#summary-prev,
+#restart-button {
+  color: #5E6272;
+  background-color: #E9E6DF;
+}
+
+#option-prev:hover,
+#summary-prev:hover,
+#restart-button:hover {
+  color: #292A31;
+  background-color: #D8D4CC;
+}
+
+body.dark #option-prev,
+body.dark #summary-prev,
+body.dark #restart-button {
+  color: #B8B0A8;
+  background-color: #3C332D;
+}
+
+body.dark #option-prev:hover,
+body.dark #summary-prev:hover,
+body.dark #restart-button:hover {
+  color: #EFECE6;
+  background-color: #4E423A;
+}
+
 /* 웹페이지가 표시되는 가로 폭이 768px 이하일 때만 적용 */
 @media (max-width: 768px) {
   body {
@@ -521,4 +695,9 @@ input[type="date"] {
 
   .book-flow { padding: 20px; }
   .book-flow .step-actions button {width: 100%;}
+
+  #book-shelf { padding: 24px 16px; }
+  .book-cards { grid-template-columns: minmax(0, 1fr); }
+
+  .complete-step .step-actions { flex-direction: column; }
 }

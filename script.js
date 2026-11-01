@@ -154,12 +154,17 @@ function showStep(index) {
     });
 }
 
-startButton.addEventListener("click", () => {
+function startAddFlow() {
     bookFlow.hidden = false;
+    bookShelf.hidden = false;
+    renderBookShelf();
+    resetBookForm();
     showStep(0);
-    bookFlow.scrollIntoView({ behavior: "smooth" });
     titleInput.focus();
-});
+    bookFlow.scrollIntoView({ behavior: "smooth" });
+}
+
+startButton.addEventListener("click", startAddFlow);
 
 function validateTitle() {
     const value = titleInput.value.trim();
@@ -207,9 +212,18 @@ optionNext.addEventListener("click", () => {
 });
 
 summaryPrev.addEventListener("click", () => showStep(1));
-finishButton.addEventListener("click", () => showStep(3));
+finishButton.addEventListener("click", () => {
+    books.push({
+        title: bookData.title,
+        unit: bookData.unit,
+        status: bookData.isReadingNow ? "읽는 중" : "읽을 예정",
+        startDate: bookData.startDate
+    });
+    renderBookShelf();
+    showStep(3);
+});
 
-restartButton.addEventListener("click", () => {
+function resetBookForm() {
     bookData.title = "";
     bookData.unit = "page";
     bookData.isReadingNow = false;
@@ -228,6 +242,83 @@ restartButton.addEventListener("click", () => {
     summaryStatus.textContent = "";
     summaryUnit.textContent = "";
     summaryDate.textContent = "";
+}
 
-    showStep(0);
+restartButton.addEventListener("click", startAddFlow);
+
+const bookShelf = document.querySelector("#book-shelf");
+const bookListEmpty = document.querySelector("#bookListEmpty");
+const bookCards = document.querySelector("#bookCards");
+const bookSummary = document.querySelector("#bookSummary");
+const goShelfButton = document.querySelector("#go-shelf-button");
+const bookDetailDialog = document.querySelector("#bookDetailDialog");
+const detailTitle = document.querySelector("#detailTitle");
+const detailStatus = document.querySelector("#detailStatus");
+const detailUnit = document.querySelector("#detailUnit");
+const detailStartDate = document.querySelector("#detailStartDate");
+const detailCloseButton = document.querySelector("#detailCloseButton");
+const shelfGuide = document.querySelector("#shelf-guide");
+const books = [];
+
+function setStatusPill(element, status) {
+    element.textContent = status;
+    element.classList.toggle("is-reading", status === "읽는 중");
+}
+
+function openBookDetail(book) {
+    detailTitle.textContent = book.title;
+    setStatusPill(detailStatus, book.status);
+    detailUnit.textContent = book.unit === "page" ? "페이지" : "퍼센트";
+    detailStartDate.textContent = book.startDate;
+    bookDetailDialog.showModal();
+}
+
+detailCloseButton.addEventListener("click", () => bookDetailDialog.close());
+
+goShelfButton.addEventListener("click", () => {
+    bookShelf.scrollIntoView({ behavior: "smooth" });
 });
+
+
+function createBookCard(book) {
+    const card = document.createElement("li");
+    const cardButton = document.createElement("button");
+    cardButton.type = "button";
+    cardButton.className = "book-card-button";
+
+    const title = document.createElement("h3");
+    title.textContent = book.title;
+    
+    const pill = document.createElement("span");
+    pill.className = "status-pill";
+
+    setStatusPill(pill, book.status);
+
+    cardButton.append(title, pill);
+    card.append(cardButton);
+
+    cardButton.addEventListener("click", () => openBookDetail(book));
+
+    return card;
+}
+
+function renderBookShelf() {
+    bookCards.replaceChildren();
+
+    const isEmpty = books.length === 0;
+    bookListEmpty.hidden = !isEmpty;
+    shelfGuide.hidden = isEmpty;
+
+    let readingCount = 0;
+    let plannedCount = 0;
+
+    books.forEach((book) => {
+        bookCards.append(createBookCard(book));
+
+        if (book.status === "읽는 중") readingCount += 1;
+        else if (book.status === "읽을 예정") plannedCount += 1;
+    });
+
+    bookSummary.textContent = "읽는 중 " + readingCount + "권 · 읽을 예정 " + plannedCount + "권";
+    bookSummary.hidden = isEmpty;
+}
