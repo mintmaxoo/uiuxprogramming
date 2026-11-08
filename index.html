@@ -164,73 +164,108 @@
         <span class="progress_item">3 · 확인</span>
       </p>
 
-      <section class="step" data-step="1" hidden>
-        <h3>책 정보를 입력해 주세요.</h3>
-        <label for="book-title">책 제목</label>
-        <input 
-          id="book-title"
-          type="text"
-          placeholder="예: 어린왕자"
-          aria-describedby="title-error"
-        >
-        <p id="title-error" class="error-message" aria-live="polite"></p>
-        <button id="title-next" type="button">독서 상태 선택하기</button>
-      </section>
+      <form id="book-form" class="book-form" novalidate aria-busy="false">
+        <section class="step" data-step="1" hidden>
+          <h3>책 정보를 입력해 주세요.</h3>
 
-      <section class="step" data-step="2" hidden>
-        <h3>독서 상태를 선택해 주세요.</h3>
-        
-        <label>기본 기록 단위</label>
-        <p class="field-help">
-          앞으로 이 책에 메모를 남길 때, 책갈피 기록 단위를 설정합니다.
-        </p>
-        <div class="unit-group">
-          <label>
-            <input type="radio" name="record-unit" value="page" checked> 페이지
+          <div class="field" id="title-field">
+            <label for="book-title">책 제목 <span class="required">필수</span></label>
+            <input
+              id="book-title"
+              name="title"
+              type="text"
+              maxlength="60"
+              required
+              placeholder="예: 어린왕자"
+              aria-describedby="title-help title-count title-error"
+            >
+            <div class="field-meta">
+              <p id="title-help" class="field-help">읽고 있거나 읽을 책의 제목을 적어 주세요.</p>
+              <p id="title-count" class="field-count" aria-live="polite">0 / 60자</p>
+            </div>
+            <p id="title-error" class="error-message" role="alert"></p>
+          </div>
+
+          <button id="title-next" type="button">독서 상태 선택하기</button>
+        </section>
+
+        <section class="step" data-step="2" hidden>
+          <h3>독서 상태를 선택해 주세요.</h3>
+
+          <fieldset class="field" aria-describedby="unit-help">
+            <legend>기본 기록 단위</legend>
+            <p id="unit-help" class="field-help">
+              앞으로 이 책에 메모를 남길 때, 책갈피 기록 단위를 설정합니다.
+            </p>
+            <div class="unit-group">
+              <label>
+                <input type="radio" name="record-unit" value="page" checked> 페이지
+              </label>
+              <label>
+                <input type="radio" name="record-unit" value="percent"> 퍼센트
+              </label>
+            </div>
+          </fieldset>
+
+          <label class="checkbox-label">
+            <input
+              type="checkbox"
+              id="is-reading"
+              name="reading"
+              value="yes"
+              aria-controls="reading-details"
+              aria-expanded="false"
+            >
+            이미 읽고 있는 책이에요.
           </label>
-          <label>
-            <input type="radio" name="record-unit" value="percent"> 퍼센트
-          </label>
-        </div>
 
-        <label class="checkbox-label">
-          <input type="checkbox" id="is-reading">
-          이미 읽고 있는 책이에요.
-        </label>
+          <div id="reading-details" hidden>
+            <div class="field" id="date-field">
+              <label for="start-date">읽기 시작한 날짜 <span class="optional">선택</span></label>
+              <input
+                id="start-date"
+                name="startDate"
+                type="date"
+                disabled
+                aria-describedby="date-help date-error"
+              >
+              <p id="date-help" class="field-help">
+                책을 읽기 시작한 날짜를 입력해 보세요.
+              </p>
+              <p id="date-error" class="error-message" role="alert"></p>
+            </div>
+          </div>
 
-        <div id="reading-details" hidden>
-          <label for="start-date">읽기 시작한 날짜 (선택)</label>
-          <input id="start-date" type="date">
-        </div>
+          <div class="step-actions">
+            <button id="option-prev" type="button">이전</button>
+            <button id="option-next" type="button">내용 확인하기</button>
+          </div>
+        </section>
 
-        <div class="step-actions">
-          <button id="option-prev" type="button">이전</button>
-          <button id="option-next" type="button">내용 확인하기</button>
-        </div>
-      </section>
+        <section class="step" data-step="3" hidden>
+          <h3>입력한 내용을 확인해 주세요.</h3>
+          <div class="summary-list">
+            <div><span>책 제목</span><strong id="summary-title"></strong></div>
+            <div><span>독서 상태</span><strong id="summary-status"></strong></div>
+            <div><span>기본 단위</span><strong id="summary-unit"></strong></div>
+            <div><span>읽기 시작한 날</span><strong id="summary-date"></strong></div>
+          </div>
+          <p id="submit-status" class="submit-status" role="status" aria-live="polite"></p>
+          <div class="step-actions">
+            <button id="summary-prev" type="button">수정하기</button>
+            <button id="finish-button" type="submit">책 추가 완료</button>
+          </div>
+        </section>
 
-      <section class="step" data-step="3" hidden>
-        <h3>입력한 내용을 확인해 주세요.</h3>
-        <div class="summary-list">
-          <div><span>책 제목</span><strong id="summary-title"></strong></div>
-          <div><span>독서 상태</span><strong id="summary-status"></strong></div>
-          <div><span>기본 단위</span><strong id="summary-unit"></strong></div>
-          <div><span>시작일</span><strong id="summary-date"></strong></div>
-        </div>
-        <div class="step-actions">
-          <button id="summary-prev" type="button">수정하기</button>
-          <button id="finish-button" type="button">책 추가 완료</button>
-        </div>
-      </section>
-
-      <section class="step complete-step" data-step="4" hidden>
-        <h3>책 추가가 완료되었습니다!</h3>
-        <p>새로운 책이 아래 내 책장에 담겼습니다. 책장에서 확인하거나 다른 책을 더 추가해 보세요.</p>
-        <div class="step-actions">
-          <button id="go-shelf-button" type="button">책장으로 가기</button>
-          <button id="restart-button" type="button">다른 책 추가하기</button>
-        </div>
-      </section>
+        <section class="step complete-step" data-step="4" hidden>
+          <h3>책 추가가 완료되었습니다!</h3>
+          <p id="complete-message">새로운 책이 아래 내 책장에 담겼습니다. 책장에서 확인하거나 다른 책을 더 추가해 보세요.</p>
+          <div class="step-actions">
+            <button id="go-shelf-button" type="button">책장으로 가기</button>
+            <button id="restart-button" type="button">다른 책 추가하기</button>
+          </div>
+        </section>
+      </form>
     </section>
     
     <section id="book-shelf" class="content-section" hidden>
@@ -248,7 +283,7 @@
       <div class="detail-list">
         <div><span>독서 상태</span><span id="detailStatus" class="status-pill"></span></div>
         <div><span>기본 단위</span><strong id="detailUnit"></strong></div>
-        <div><span>시작일</span><strong id="detailStartDate"></strong></div>
+        <div><span>읽기 시작한 날</span><strong id="detailStartDate"></strong></div>
       </div>
       <div class="dialog-actions">
         <button id="detailCloseButton" type="button">닫기</button>

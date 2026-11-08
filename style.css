@@ -396,12 +396,11 @@ body.dark .panel {
 }
 
 .book-flow .error-message {
+  min-height: 22px;
+  margin: 6px 0 12px;
   color: #9d243d;
+  font-size: 13px;
   font-weight: 700;
-}
-
-.book-flow input.has-error { 
-  border-color: #9d243d; 
 }
 
 .book-flow .summary-list > div {
@@ -620,6 +619,118 @@ body.dark #restart-button:hover {
   color: #EFECE6;
   background-color: #4E423A;
 }
+
+.book-form {
+  display: block;
+  max-width: none;
+}
+
+.book-form fieldset {
+  min-width: 0;
+  margin: 0 0 12px;
+  padding: 0;
+  border: 0;
+}
+
+.book-form legend {
+  padding: 0;
+  margin-bottom: 4px;
+  font-weight: 700;
+}
+
+.field > label {
+  display: block;
+  font-weight: 700;
+}
+
+.field input[type="text"] {
+  display: block;
+  width: 100%;
+  margin: 8px 0 0;
+}
+
+.field input[type="date"] {
+  display: block;
+  margin: 8px 0 0;
+}
+
+.required,
+.optional {
+  margin-left: 6px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.required { color: #9a4a1c; background-color: #FFF3E5; }
+.optional { color: #5E6272; background-color: #F0EEF3; }
+
+.field-help {
+  margin: 0 0 8px;
+  color: #6b6e80;
+  font-size: 13px;
+}
+
+.field-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.field-meta p {
+  margin: 6px 0 0;
+  font-size: 13px;
+}
+
+.field-count {
+  flex: none;
+  color: #6b6e80;
+}
+
+.field.is-valid input { border-color: #16805d; }
+.field.is-valid .field-help { color: #116448; }
+.field.has-error input { border-color: #9d243d; }
+
+.field-help,
+.field-count,
+.book-flow .error-message,
+.submit-status {
+  word-break: keep-all;
+}
+
+.step h3:focus-visible {
+  outline: 3px solid #F6D4BE;
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.submit-status {
+  min-height: 24px;
+  margin: 12px 0 0;
+  color: #5E6272;
+  font-weight: 700;
+}
+
+.submit-status.is-error { color: #9d243d; }
+
+#finish-button:disabled {
+  color: #ffffff;
+  background-color: #a8a8b2;
+  cursor: not-allowed;
+}
+
+#date-help {
+  margin-top: 8px;
+}
+
+body.dark .required { color: #E99E6E; background-color: #38302B; }
+body.dark .optional { color: #B8B0A8; background-color: #3C332D; }
+body.dark .field.is-valid .field-help { color: #7BC9A4; }
+body.dark .field.is-valid input { border-color: #3FA37C; }
+body.dark .book-flow .error-message,
+body.dark .submit-status.is-error { color: #FF9AAE; }
+body.dark .field.has-error input { border-color: #FF9AAE; }
 
 /* 웹페이지가 표시되는 가로 폭이 768px 이하일 때만 적용 */
 @media (max-width: 768px) {
