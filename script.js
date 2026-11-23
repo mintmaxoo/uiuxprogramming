@@ -162,6 +162,12 @@ const optionNext = document.querySelector("#option-next");
 const summaryPrev = document.querySelector("#summary-prev");
 const finishButton = document.querySelector("#finish-button");
 const restartButton = document.querySelector("#restart-button");
+const unitRadios = document.querySelectorAll('input[name="record-unit"]');
+const unitDescription = document.querySelector("#unit-desc");
+const unitDescriptions = {
+    page: "읽은 쪽수를 기록해요.",
+    percent: "읽은 비율(0~100%)을 기록해요."
+};
 const summaryTitle = document.querySelector("#summary-title");
 const summaryStatus = document.querySelector("#summary-status");
 const summaryUnit = document.querySelector("#summary-unit");
@@ -189,6 +195,8 @@ function showStep(index, moveFocus) {
     flowSteps.forEach((step, i) => { step.hidden = i !== index; });
     progressItems.forEach((item, i) => {
         item.classList.toggle("is-active", i === index);
+        if (i === index) item.setAttribute("aria-current", "step");
+        else item.removeAttribute("aria-current");
     });
 
     if (moveFocus === false) return;
@@ -197,6 +205,15 @@ function showStep(index, moveFocus) {
     heading.tabIndex = -1;
     heading.focus({ preventScroll: true });
 }
+
+function updateUnitDescription() {
+    const selected = document.querySelector('input[name="record-unit"]:checked');
+    unitDescription.textContent = unitDescriptions[selected.value];
+}
+
+unitRadios.forEach((radio) => {
+    radio.addEventListener("change", updateUnitDescription);
+});
 
 function startAddFlow() {
     bookFlow.hidden = false;
@@ -457,6 +474,7 @@ bookForm.addEventListener("submit", async (event) => {
 
 function resetBookForm() {
     bookForm.reset();
+    updateUnitDescription();
 
     bookData.title = "";
     bookData.unit = "page";
@@ -493,6 +511,10 @@ const filterButtons = document.querySelectorAll(".filter-button");
 const countAll = document.querySelector("#count-all");
 const countReading = document.querySelector("#count-reading");
 const countPlanned = document.querySelector("#count-planned");
+const shelfStatus = document.querySelector("#shelf-status");
+const emptyTitle = bookListEmpty.querySelector("h3");
+const emptyDescription = bookListEmpty.querySelector("p");
+const emptyAction = bookListEmpty.querySelector("a");
 
 const storageKey = "books-shelf-v1";
 
@@ -596,12 +618,20 @@ function renderBookShelf() {
     countReading.textContent = readingCount;
     countPlanned.textContent = plannedCount;
 
+    const filteredEmpty = hasBooks && visibleBooks.length === 0;
+
     if (!hasBooks) {
-        bookListEmpty.textContent = "책장에 담긴 책이 없어요. 위에서 새로운 책을 추가해 보세요.";
-    } else if (visibleBooks.length === 0) {
-        bookListEmpty.textContent = "선택한 상태의 책이 없어요. 다른 상태를 선택해 보세요.";
+        emptyTitle.textContent = "책장에 담긴 책이 없어요.";
+        emptyDescription.textContent = "위에서 새로운 책을 추가해 보세요.";
+    } else if (filteredEmpty) {
+        emptyTitle.textContent = "선택한 상태의 책이 없어요.";
+        emptyDescription.textContent = "전체 보기를 누르면 책장의 모든 책을 볼 수 있어요.";
     }
 
+    emptyAction.textContent = filteredEmpty ? "전체 보기" : "책 추가하러 가기";
+    emptyAction.href = filteredEmpty ? "#book-shelf" : "#start";
+
+    shelfStatus.textContent = "";
     shelfGuide.hidden = !hasBooks;
     shelfFilters.hidden = !hasBooks;
     bookListEmpty.hidden = visibleBooks.length > 0;
@@ -621,10 +651,24 @@ function selectFilter(filter) {
     });
 
     renderBookShelf();
+
+    const count = getVisibleBooks().length;
+    const filterName = filter === "all" ? "전체" : filter;
+    shelfStatus.textContent = count > 0
+        ? filterName + " 책 " + count + "권이 표시됩니다."
+        : filterName + " 책이 없습니다. 다른 상태를 선택해 보세요.";
 }
 
 filterButtons.forEach((button) => {
     button.addEventListener("click", () => selectFilter(button.dataset.filter));
+});
+
+emptyAction.addEventListener("click", (event) => {
+    if (currentFilter === "all") return;
+
+    event.preventDefault();
+    selectFilter("all");
+    document.querySelector('[data-filter="all"]').focus();
 });
 
 renderBookShelf();
@@ -651,6 +695,10 @@ function updateCurrentNav() {
             link.removeAttribute("aria-current");
         }
     });
+
+    const currentLink = document.querySelector('.main-nav a[aria-current="page"]');
+    const pageName = currentLink && currentHash ? currentLink.textContent.trim() : "홈";
+    document.title = pageName + " | " + serviceName;
 }
 
 window.addEventListener("hashchange", updateCurrentNav);
@@ -672,6 +720,13 @@ function setMenuOpen(open) {
 
 menuToggle.addEventListener("click", () => {
     setMenuOpen(!mainNav.classList.contains("is-open"));
+});
+
+document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape" || !mainNav.classList.contains("is-open")) return;
+
+    setMenuOpen(false);
+    menuToggle.focus();
 });
 
 navLinks.forEach((link) => {

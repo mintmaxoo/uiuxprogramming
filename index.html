@@ -19,6 +19,8 @@
   정보 순서: 서비스 소개 → 주요 기능 → 이용 방법 → 모아진 기록 받기
   -->
 
+  <a class="skip-link" href="#top">본문 바로가기</a>
+
   <header class="site-header">
     <div class="header-inner">
       <a class="brand" href="#top" aria-label="책들 맨 위로">책들</a>
@@ -41,7 +43,7 @@
     </div>
   </header>
 
-  <main id="top">
+  <main id="top" tabindex="-1">
     <div class="page-intro">
       <p class="eyebrow">BOOK NOTES SERVICE</p>
       <h1>병행독서 기록 메모</h1>
@@ -55,7 +57,7 @@
           <p>그날그날의 흩어진 기록을 한 곳에서 모아 볼 수 있습니다.</p>
         </div>      
         <img class="service-image" src="./assets/images/service.png" 
-          alt="기록된 메모의 흐름과 메모하는 휴대폰 화면">        
+          alt="여러 책의 메모를 시간의 흐름대로 기록하는 화면과 책별로 분류되는 서비스의 개요 이미지">        
       </div>
     </section>
 
@@ -140,7 +142,7 @@
 
       <div id="agree-area" class="interaction-grid">
         <article class="interaction-card">
-          <h3>이용 시작 안내</h3>
+          <h2>이용 시작 안내</h2>
           <label class="agree-row" for="agreeCheck">
             <input id="agreeCheck" type="checkbox">
             서비스 이용 방법을 확인했습니다.
@@ -156,11 +158,11 @@
 
       <section id="book-flow" class="book-flow" hidden>
         <h2>책 추가하기</h2>
-        <p class="progress" aria-label="책 추가 진행 단계">
-          <span class="progress_item">1 · 정보</span>
-          <span class="progress_item">2 · 상태</span>
-          <span class="progress_item">3 · 확인</span>
-        </p>
+        <ol class="progress" aria-label="책 추가 진행 단계">
+          <li class="progress_item">1 · 정보</li>
+          <li class="progress_item">2 · 상태</li>
+          <li class="progress_item">3 · 확인</li>
+        </ol>
   
         <form id="book-form" class="book-form" novalidate aria-busy="false">
           <section class="step" data-step="1" hidden>
@@ -179,7 +181,7 @@
               >
               <div class="field-meta">
                 <p id="title-help" class="field-help">읽고 있거나 읽을 책의 제목을 적어 주세요.</p>
-                <p id="title-count" class="field-count" aria-live="polite">0 / 60자</p>
+                <p id="title-count" class="field-count">0 / 60자</p>
               </div>
               <p id="title-error" class="error-message" role="alert"></p>
             </div>
@@ -203,6 +205,7 @@
                   <input type="radio" name="record-unit" value="percent"> 퍼센트
                 </label>
               </div>
+              <p id="unit-desc" class="field-help" role="status" aria-live="polite">읽은 쪽수를 기록해요.</p>
             </fieldset>
   
             <label class="checkbox-label">
@@ -279,11 +282,17 @@
         <button class="filter-button" type="button" data-filter="읽을 예정" aria-pressed="false">읽을 예정 <span id="count-planned" class="filter-count">0</span></button>
       </div>
 
-      <p id="bookListEmpty">책장에 담긴 책이 없어요. 위에서 새로운 책을 추가해 보세요.</p>
+      <p id="shelf-status" class="filter-result" role="status" aria-live="polite"></p>
+
+      <div id="bookListEmpty" class="empty-state">
+        <h3>책장에 담긴 책이 없어요.</h3>
+        <p>위에서 새로운 책을 추가해 보세요.</p>
+        <a class="empty-action" href="#start">책 추가하러 가기</a>
+      </div>
       <ul id="bookCards" class="book-cards"></ul>
     </section>
 
-    <dialog id="bookDetailDialog" class="detail-dialog">
+    <dialog id="bookDetailDialog" class="detail-dialog" aria-labelledby="detailTitle">
       <h3 id="detailTitle"></h3>
       <div class="detail-list">
         <div><span>독서 상태</span><span id="detailStatus" class="status-pill"></span></div>
@@ -291,7 +300,7 @@
         <div><span>읽기 시작한 날</span><strong id="detailStartDate"></strong></div>
       </div>
       <div class="dialog-actions">
-        <button id="detailCloseButton" type="button">닫기</button>
+        <button id="detailCloseButton" type="button" aria-label="책 정보 닫기">닫기</button>
       </div>
     </dialog>
 
